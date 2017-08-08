@@ -1,23 +1,21 @@
-let container = document.querySelector('.container');
-let list = document.createElement("ul");
+const containerList = document.querySelector("ul")
 
-list.append(container)
-
-
-
-// 2. Create our Ajax Request
 let request = new XMLHttpRequest();
-request.addEventListener("load", displayCharacters);
+request.addEventListener("load", ListStuff);
 request.open('GET', 'https://api.github.com/users/mateencode');
 request.send();
 
-// Our display function
-function displayCharacters () {
-  // Parse our response text
+function ListStuff(){
+
   let data = JSON.parse(this.responseText);
-  let gitList = `<li>${data.name}</Li>`
+  let list = '';
 
+  list = `<li><strong>${data.name}</strong></li>
+          <li>${data.url}</li>
+          <li>${data.bio}</li>
+          <li>${data.company}</li>
+          <li>${data.location}</li>
+  `;
 
-list.innerHTML = gitList
-
+  containerList.innerHTML = list;
 }
